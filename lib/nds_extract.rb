@@ -84,7 +84,7 @@ def movies_with_directors_set(source)
   # [{ :name => "A", :movies => [{ :title => "Test" }] }, ....]
   # becomes... [[{:title => "Test", :director_name => "A"}], ...[], ... []]
   array = []
-  
+  source.length.times do ||
   return array
 end
 
