@@ -85,7 +85,7 @@ def movies_with_directors_set(source)
   # becomes... [[{:title => "Test", :director_name => "A"}], ...[], ... []]
   array = []
   source.length.times do |hash|
-    
+    hash = 
   return array
 end
 
