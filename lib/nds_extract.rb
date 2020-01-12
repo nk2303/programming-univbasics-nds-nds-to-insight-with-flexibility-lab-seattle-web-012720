@@ -38,16 +38,17 @@ def movies_with_director_key(name, movies_collection)
   # of movies and a directors name to the movie_with_director_name method
   # and accumulate the returned Array of movies into a new Array that's
   # returned by this method.
-  #
   # INPUT:
   # * name: A director's name
   # * movies_collection: An Array of Hashes where each Hash represents a movie
-  #
   # RETURN:
-  #
   # Array of Hashes where each Hash represents a movie; however, they should all have a
   # :director_name key. This addition can be done by using the provided
   # movie_with_director_name method
+  movies_collection.length.times do |hash|
+    movies_collection[hash][:director_name] = name
+  end
+  return movies_collection
 end
 
 
@@ -55,27 +56,39 @@ def gross_per_studio(collection)
   # GOAL: Given an Array of Hashes where each Hash represents a movie,
   # return a Hash that includes the total worldwide_gross of all the movies from
   # each studio.
-  #
   # INPUT:
   # * collection: Array of Hashes where each Hash where each Hash represents a movie
-  #
   # RETURN:
-  #
   # Hash whose keys are the studio names and whose values are the sum
   # total of all the worldwide_gross numbers for every movie in the input Hash
+  hash = {}
+  collection.length.times do |studio|
+    key = collection[studio][:studio]
+    value = collection[studio][:worldwide_gross]
+    if(hash[key])
+      hash[key] = value + hash[key]
+    else
+      hash[key] = value
+    end
+  end
+  return hash
 end
 
 def movies_with_directors_set(source)
   # GOAL: For each director, find their :movies Array and stick it in a new Array
-  #
-  # INPUT:
-  # * source: An Array of Hashes containing director information including
-  # :name and :movies
-  #
+  # * source: An Array of Hashes including
+  # :name and :movies [{:name=1, :movies=>2},{:name=1, :movies=>2}]
   # RETURN:
-  #
   # Array of Arrays containing all of a director's movies. Each movie will need
-  # to have a :director_name key added to it.
+  # to have a :director_name key added to it. []
+  # [{ :name => "A", :movies => [{ :title => "Test" }] }, ....]
+  # becomes... [[{:title => "Test", :director_name => "A"}], ...[], ... []]
+  array = []
+  source.length.times do |hash|
+    array.push(source[hash][:movies])
+    array[hash][0][:director_name] = source[hash][:name]
+  end
+  return array
 end
 
 # ----------------    End of Your Code Region --------------------
