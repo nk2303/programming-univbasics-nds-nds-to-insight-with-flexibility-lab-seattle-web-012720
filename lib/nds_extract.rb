@@ -87,6 +87,9 @@ def movies_with_directors_set(source)
   source.length.times do |hash|
     array.push(source[hash][:movie])
   end
+  array.length.times do |arr|
+    arr
+  end
   return array
 end
 
